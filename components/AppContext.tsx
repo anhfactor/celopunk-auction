@@ -38,10 +38,13 @@ export const AppProvider = (props) => {
     totalSupplyNFT: () => {},
     getOwnerNFT: () => {},
     getTrack: (tokenId) => {},
+    loadOfferAvailable: () => {},
     makeOffer: (tokenId, enteredPrice) => {}, 
-    cancelOffer: (tokenId) => {},
+    cancelOffer: (offerId) => {},
     fillOffer: (offerId, price) => {},
     marketplaceFindIndex: (tokenId) => {},
+    userFund: () => {},
+    claimFunds: () => {},
     safeMint: (uri: any) => {},
   };
 
@@ -76,7 +79,23 @@ export const AppProvider = (props) => {
         // mint the NFT and save the IPFS url to the blockchain
         return await nftCollectionContract.methods
             .safeMint(uri)
-            .send({from: account});
+            .send({from: account})
+            .on('transactionHash', (hash) => {
+            })
+            .on('error', (e) => {
+              toast({
+                title: 'Error',
+                description: e.toString(),
+                status: 'error',
+              });
+          })
+          .on('receipt', () => {
+            toast({
+              title: 'Success',
+              description: 'Mint NFT success.',
+              status: 'success',
+            });
+          });
     } catch (error) {
         toast({
           title: 'Error',
@@ -106,18 +125,44 @@ export const AppProvider = (props) => {
     }
   };
 
+  functionsToExport.userFund = async() => {
+    return await nftMarketplaceContract.methods.userFunds(address).call();
+  }
+
+  functionsToExport.claimFunds = async() => {
+    return await nftMarketplaceContract.methods.claimFunds().call();
+  }
+
   functionsToExport.getTrack = async(tokenId) => {
     return await nftCollectionContract.methods.getTrack(tokenId).call();
   }
 
+  functionsToExport.loadOfferAvailable = async() => {
+    const offerCount = await nftMarketplaceContract.methods.offerCount().call();
+    let offers = [];
+      for (let i = 0; i < offerCount; i++) {
+          const offer = await nftMarketplaceContract.methods.offers(i + 1).call();
+          offers.push(offer);
+      }
+    offers = await offers
+        .map((offer) => {
+            offer.offerId = parseInt(offer.offerId);
+            offer.id = parseInt(offer.id);
+            offer.price = parseInt(offer.price);
+            return offer;
+        })
+        .filter((offer) => offer.fulfilled === false && offer.cancelled === false);
+    return offers;
+  }
+
   functionsToExport.makeOffer = async(tokenId, enteredPrice) => {
-    nftCollectionContract.methods
+    await nftCollectionContract.methods
       .approve(NFTMarketplaceAddress,tokenId)
       .send({ from: address })
       .on('transactionHash', (hash) => {
       })
-      .on('receipt', (receipt) => {
-        nftMarketplaceContract.methods
+      .on('receipt', async(receipt) => {
+        await nftMarketplaceContract.methods
               .makeOffer(tokenId, enteredPrice)
               .send({ from: address })
               .on('error', (error) => {
@@ -126,12 +171,19 @@ export const AppProvider = (props) => {
                   description: error.toString(),
                   status: 'error',
                 });
+              })
+              .on('receipt', () => {
+                toast({
+                  title: 'Success',
+                  description: 'Make offer success.',
+                  status: 'success',
+                });
               });
       });
   }
   // buy from explore NFT
   functionsToExport.fillOffer = async(offerId, price) => {
-    nftMarketplaceContract.methods
+    await nftMarketplaceContract.methods
         .fillOffer(offerId)
         .send({ from: address, value: price })
         .on('transactionHash', (hash) => {
@@ -142,12 +194,19 @@ export const AppProvider = (props) => {
             description: error.toString(),
             status: 'error',
           });
+        })
+        .on('receipt', () => {
+          toast({
+            title: 'Success',
+            description: 'Buy NFT success.',
+            status: 'success',
+          });
         });
   }
 
-  functionsToExport.cancelOffer = async(tokenId) => {
+  functionsToExport.cancelOffer = async(offerId) => {
     await nftMarketplaceContract.methods
-          .cancelOffer(tokenId)
+          .cancelOffer(offerId)
           .send({ from: address })
           .on('transactionHash', (hash) => {
           })
@@ -156,8 +215,15 @@ export const AppProvider = (props) => {
               title: 'Error',
               description: error.toString(),
               status: 'error',
+            })
+           })
+           .on('receipt', () => {
+            toast({
+              title: 'Success',
+              description: 'Cancel offer success.',
+              status: 'success',
             });
-      });
+          });
   }
 
   // get all with owner name
@@ -165,17 +231,17 @@ export const AppProvider = (props) => {
     try {
       var nftsLength = await nftCollectionContract.methods.totalSupply().call();
       const nfts = [];
-
+      let loadOfferAvailable:any = await functionsToExport.loadOfferAvailable();
       for (let i = 0; i < Number(nftsLength); i++) {
         const nft = await new Promise(async (resolve) => {
           const res = await nftCollectionContract.methods.tokenURI(i).call();
           const owner = await nftCollectionContract.methods.ownerOf(i).call();
-          const offer = await await nftMarketplaceContract.methods.offers(i).call();
+          const offer = await loadOfferAvailable.filter((offer) => offer.id === i)
           const meta = await fetchNftMeta(res);
           resolve({
             index: i,
             owner,
-            offer: offer,
+            offer: offer[0],
             name: meta.data.properties.name,
             image: meta.data.properties.image,
             description: meta.data.properties.description,

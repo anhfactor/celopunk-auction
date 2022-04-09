@@ -19,9 +19,11 @@ export const ExploreNFTCard = ({ nft }) => {
 
   const buyHandler = async() => {
     setIsLoading(true);
-    console.log(offer.id)
-    await fillOffer(offer.id, offer.price);
+    await fillOffer(offer.offerId, offer.price);
     setIsLoading(false);
+    setTimeout(() => {
+      router.push('/assets');
+    }, 1000);
   };
 
   return (

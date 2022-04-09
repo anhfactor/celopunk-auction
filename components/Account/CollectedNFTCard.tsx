@@ -15,24 +15,25 @@ export const CollectedNFTCard = ({ nft }) => {
   const router = useRouter();
   const { account, makeOffer, cancelOffer } = useContext(AppContext);
   const [price, setPrice] = useState();
+  const [isLoadingCancel, setIsLoadingCancel] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { name, description, image, category, dateCreated, index, owner, offer } = nft;
 
 
   const makeOfferHandler = async() => {
+    await setIsLoading(true);
     const enteredPrice = await Web3.utils.toWei(price, 'ether');
-    setIsLoading(true);
     await makeOffer(index, enteredPrice);
-    setIsLoading(false);
+    await setIsLoading(false);
     setTimeout(() => {
       router.push('/assets');
     }, 1000);
   }; 
 
   const cancelHandler = async() => {
-    setIsLoading(true);
-    await cancelOffer(index)
-    await setIsLoading(false);
+    setIsLoadingCancel(true);
+    await cancelOffer(offer.offerId)
+    await setIsLoadingCancel(false);
     setTimeout(() => {
       router.push('/assets');
     }, 1000);
@@ -77,7 +78,7 @@ export const CollectedNFTCard = ({ nft }) => {
           </Text>
           <Button colorScheme='red' variant='solid' size='sm' 
                   onClick={cancelHandler}
-                  isLoading={isLoading}
+                  isLoading={isLoadingCancel}
                   >
             Cancel Offer
           </Button>
