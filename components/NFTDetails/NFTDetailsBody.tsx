@@ -1,21 +1,16 @@
 import { useEffect, useState, useContext } from 'react';
 import {
   Flex,
-  HStack,
-  Button,
   Text,
   Heading,
   Badge,
   Spacer,
-  Input,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { CalendarIcon, StarIcon } from '@chakra-ui/icons'
 
 import { MotionChakraImage } from '@components/Animated/MotionChakraImage';
-import { getJSONfromHash, imageSourceBaseURL } from '@config/axios';
 import AppContext from '@components/AppContext';
-import { utils } from 'ethers';
 
 export const NFTDetailsBody = () => {
   const router = useRouter();
@@ -87,7 +82,6 @@ export const NFTDetailsBody = () => {
           <StarIcon/> Category: {category}
         </Text>
         <Spacer />
-        {/* {renderBidBuyButton()} */}
       </Flex>
     </Flex>
   );

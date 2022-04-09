@@ -1,7 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
 
-import { IoIosHeartEmpty } from 'react-icons/io';
-
 export const EmptyContent = () => {
   return (
     <Flex flexDir='column'>

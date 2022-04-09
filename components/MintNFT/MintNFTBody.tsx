@@ -1,11 +1,9 @@
-import { useState, useRef, useContext, useEffect } from 'react';
+import { useState, useRef, useContext } from 'react';
 import {
   Flex,
-  Text,
   Input,
   FormControl,
   FormLabel,
-  FormErrorMessage,
   FormHelperText,
   Heading,
   VStack,

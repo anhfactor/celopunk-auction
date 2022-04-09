@@ -3,8 +3,6 @@ import { Flex, Heading, SimpleGrid, Center, Spinner, Divider } from '@chakra-ui/
 
 import AppContext from '@components/AppContext';
 import { ExploreNFTCard } from './ExploreNFTCard';
-import { EmptyContent } from '@components/EmptyContent';
-import { CollectionCard } from '@components/ExploreCollections/CollectionCard';
 import { MotionChakraImage } from '@components/Animated/MotionChakraImage';
 
 export const ExploreNFTsBody = () => {

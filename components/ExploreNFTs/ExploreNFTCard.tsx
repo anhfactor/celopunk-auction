@@ -1,8 +1,6 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { Flex, Text, VStack, Button, Badge, Tooltip, Divider, Icon } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { utils } from 'ethers';
-import { formatDistanceToNowStrict } from 'date-fns';
 import { CalendarIcon, StarIcon } from '@chakra-ui/icons'
 import { formatDate, formatPrice } from '../../utils/helpfulFunctions';
 import { MdAttachMoney } from 'react-icons/md'

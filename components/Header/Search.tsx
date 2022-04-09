@@ -1,6 +1,5 @@
 import {
   Flex,
-  Text,
   Input,
   InputGroup,
   InputLeftElement,

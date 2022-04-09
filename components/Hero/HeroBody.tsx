@@ -1,4 +1,4 @@
-import { Flex, HStack, Heading, Button, useBreakpointValue, Text } from '@chakra-ui/react';
+import { Flex, HStack, Heading, Button, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import { MarketplaceAnimation } from './MarketplaceAnimation';

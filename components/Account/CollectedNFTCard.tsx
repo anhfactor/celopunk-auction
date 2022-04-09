@@ -1,11 +1,9 @@
-import { useEffect, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Flex, Text, Button, Input, Stack, Badge, Divider, Icon } from '@chakra-ui/react';
 import { CalendarIcon, StarIcon } from '@chakra-ui/icons'
-import { getJSONfromHash, imageSourceBaseURL } from '@config/axios';
 import { MdAttachMoney } from 'react-icons/md'
 
 import AppContext from '@components/AppContext';
-import { ListForSaleModal } from '@components/CollectionDetails/ListForSaleModal';
 import { MotionChakraImage } from '@components/Animated/MotionChakraImage';
 import { formatDate } from '../../utils/helpfulFunctions';
 import { useRouter } from 'next/router';
@@ -98,7 +96,7 @@ export const CollectedNFTCard = ({ nft }) => {
                 placeholder='Celo ...' 
                 size='sm'
                 value={price}
-                onChange={(event) => setPrice(event.target.value)}
+                onChange={(event:any) => setPrice(event.target.value)}
           />
         </Stack>
         </>}

@@ -1734,9 +1734,9 @@
     url "^0.11.0"
 
 "@rushstack/eslint-patch@^1.0.8":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.1.1.tgz#782fa5da44c4f38ae9fd38e9184b54e451936118"
-  integrity sha512-BUyKJGdDWqvWC5GEhyOiUrGNi9iJUr4CU0O2WxJL6QJhHeeA/NVBalH+FeK0r/x/W0rPymXt5s78TDS7d6lCwg==
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.1.2.tgz#7a26e63b1bdaf654bcce2176a38b83f7f576327e"
+  integrity sha512-oe5WJEDaVsW8fBlGT7udrSCgOwWfoYHQOmSpnh8X+0GXpqqcRCP8k4y+Dxb0taWJDPpB+rdDUtumIiBwkY9qGA==
 
 "@sentry/core@5.30.0":
   version "5.30.0"
@@ -7997,7 +7997,7 @@ minimatch@^3.0.4, minimatch@^3.1.2:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimist@^1.2.0, minimist@^1.2.5, minimist@^1.2.6, minimist@~1.2.5:
+minimist@^1.2.0, minimist@^1.2.5, minimist@^1.2.6, minimist@~1.2.6:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
   integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
@@ -10366,9 +10366,9 @@ swarm-js@^0.1.40:
     xhr-request "^1.0.1"
 
 tape@^4.6.3:
-  version "4.15.0"
-  resolved "https://registry.yarnpkg.com/tape/-/tape-4.15.0.tgz#1b8a9563b4bc7e51302216c137732fb2ce6d1a99"
-  integrity sha512-SfRmG2I8QGGgJE/MCiLH8c11L5XxyUXxwK9xLRD0uiK5fehRkkSZGmR6Y1pxOt8vJ19m3sY+POTQpiaVv45/LQ==
+  version "4.15.1"
+  resolved "https://registry.yarnpkg.com/tape/-/tape-4.15.1.tgz#88fb662965a11f9be1bddb04c11662d7eceb129e"
+  integrity sha512-k7F5pyr91n9D/yjSJwbLLYDCrTWXxMSXbbmHX2n334lSIc2rxeXyFkaBv4UuUd2gBYMrAOalPutAiCxC6q1qbw==
   dependencies:
     call-bind "~1.0.2"
     deep-equal "~1.1.1"
@@ -10379,7 +10379,7 @@ tape@^4.6.3:
     has "~1.0.3"
     inherits "~2.0.4"
     is-regex "~1.1.4"
-    minimist "~1.2.5"
+    minimist "~1.2.6"
     object-inspect "~1.12.0"
     resolve "~1.22.0"
     resumer "~0.0.0"

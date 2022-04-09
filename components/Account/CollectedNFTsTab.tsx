@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import { Flex, Text, Center, Spinner, SimpleGrid } from '@chakra-ui/react';
+import { Flex, Center, Spinner, SimpleGrid } from '@chakra-ui/react';
 
 import AppContext from '@components/AppContext';
 import { CollectedNFTCard } from './CollectedNFTCard';

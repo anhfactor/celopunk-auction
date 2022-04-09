@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Flex, Text, Image, Spinner } from '@chakra-ui/react';
+import { Image } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
 export const MotionChakraImage = ({ src, alt, ...props }) => {

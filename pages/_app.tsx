@@ -2,7 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 import { HeaderBody } from '@components/Header/HeaderBody';
 import { FooterBody } from '@components/Footer/FooterBody';
-import AppContext, { AppProvider } from '@components/AppContext';
+import { AppProvider } from '@components/AppContext';
 import {
   ContractKitProvider,
   Alfajores,
