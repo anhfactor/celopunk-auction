@@ -1,4 +1,4 @@
-import { Flex, HStack, Heading, Button } from '@chakra-ui/react';
+import { Flex, HStack, Heading, Button, useBreakpointValue, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import { MarketplaceAnimation } from './MarketplaceAnimation';
@@ -14,7 +14,10 @@ export const HeroBody = () => {
       >
         <Heading>Discover, collect, and sell extraordinary NFTs</Heading>
         <Heading as='h2' fontSize='xl' fontWeight='medium' mt={8} mb={4}>
-          CeloPunk Auction is the first CryptoPunk marketplace on Celo chain. *Dacade.org demo*
+          <Text as={'span'} color={'green.400'}
+          fontWeight={800}
+          >CeloPunk Auction</Text> is the first CryptoPunk marketplace on Celo chain. 
+          *Dacade.org demo*
         </Heading>
           *Support alfajores celo testnet. ChainId: 44787
         <HStack alignSelf='flex-start' mt='16' spacing='4'>

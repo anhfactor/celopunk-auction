@@ -5,7 +5,7 @@ export const TabHeaders = () => {
   return (
     <Flex flexDir='row'>
       <TabHeader tabLabel='Your available NFTS' tabName='myassets' />
-      <TabHeader tabLabel='Collect sale fund' tabName='listings' />
+      <TabHeader tabLabel='Collect sale fund' tabName='collect' />
     </Flex>
   );
 };

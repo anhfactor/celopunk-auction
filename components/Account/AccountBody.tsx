@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 import AppContext from '@components/AppContext';
 import { CollectedNFTsTab } from './CollectedNFTsTab';
-import { ListingsTab } from './ListingsTab';
+import { CollectSaleTab } from './CollectSaleTab';
 import { TabHeaders } from './TabHeaders';
 import { truncate } from '@utils/helpfulFunctions';
 
@@ -24,12 +24,10 @@ export const AccountBody = () => {
 
   const renderTab = () => {
     if (!tab || tab === 'myassets') {
-      // return <CollectedNFTsTab />;
-
       return <CollectedNFTsTab />;
     }
-    if (tab === 'listings') {
-      return <ListingsTab />;
+    if (tab === 'collect') {
+      return <CollectSaleTab />;
     }
   };
 

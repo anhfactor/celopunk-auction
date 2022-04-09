@@ -152,7 +152,6 @@ export const CollectionDetailsBody = () => {
         >
           Create an NFT in this collection.
         </Button>
-        {/* <Button onClick={onWithdraw}>Withdraw all earnings</Button> */}
       </VStack>
       {renderNFTs()}
     </Flex>

@@ -130,7 +130,24 @@ export const AppProvider = (props) => {
   }
 
   functionsToExport.claimFunds = async() => {
-    return await nftMarketplaceContract.methods.claimFunds().call();
+    await nftMarketplaceContract.methods.claimFunds()
+            .send({ from: address })
+            .on('transactionHash', (hash) => {
+            })
+            .on('error', (error) => {
+              toast({
+                title: 'Error',
+                description: error.toString(),
+                status: 'error',
+              });
+            })
+            .on('receipt', () => {
+              toast({
+                title: 'Success',
+                description: 'Claim fund success.',
+                status: 'success',
+              });
+            });
   }
 
   functionsToExport.getTrack = async(tokenId) => {

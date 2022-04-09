@@ -32,8 +32,12 @@ export const CollectedNFTsTab = () => {
     <Flex m='16'>
       <SimpleGrid columns={4} spacing='8'>
         {collectedNFTs.map((nft) => {
-          if (nft.owner.toUpperCase() === account.toUpperCase() || nft.offer.user.toUpperCase() == account.toUpperCase())
+          console.log(nft)
+          if (nft.owner.toUpperCase() === account.toUpperCase())
             return <CollectedNFTCard key={nft.index} nft={nft} />;
+          if (nft.offer)
+            if (nft.offer.user.toUpperCase() == account.toUpperCase())
+              return <CollectedNFTCard key={nft.index} nft={nft} />;
         })}
       </SimpleGrid>
     </Flex>
