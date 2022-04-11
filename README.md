@@ -53,8 +53,8 @@ First you need to copy .env.example to .env and fill in your private key.
 Run the following command in your terminal after cloning the main repo:
 
 ```
-npx hardhat run scripts/deploy.js --network alfajores
 yarn
+npx hardhat run scripts/deploy.js --network alfajores
 yarn build
 yarn dev
 yarn start
