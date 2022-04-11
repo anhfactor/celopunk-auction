@@ -19,7 +19,7 @@ export const ConnectWallet = () => {
       setBalance(formatBigNumber(ba.CELO))
     };
     fetch();
-  }, []);
+  }, [account]);
 
   const renderConnectButton = () => {
     if (account) {

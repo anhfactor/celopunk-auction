@@ -28,8 +28,11 @@ export const AppProvider = (props) => {
 
   useEffect(() => {
     if (address) getContract(NFTCollection.abi, NFTMarketplace.abi);
-    if (account) setAccount(address)
   }, [address, getContract]);
+
+  useEffect(() => {
+    if (address) setAccount(address)
+  }, [account])
 
   const functionsToExport = {
     connectWallet: () => {},
@@ -53,7 +56,7 @@ export const AppProvider = (props) => {
   functionsToExport.connectWallet = async () => {
     try {
       await connect();
-      await setAccount(address)
+      setAccount(address)
       toast({
         title: 'Success',
         description: 'Wallet connected succesfully.',
