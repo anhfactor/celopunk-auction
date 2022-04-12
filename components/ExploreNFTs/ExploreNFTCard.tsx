@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
-import { Flex, Text, VStack, Button, Badge, Tooltip, Divider, Icon } from '@chakra-ui/react';
+import { Flex, Text, VStack, Button, Badge, Divider, Icon } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { CalendarIcon, StarIcon } from '@chakra-ui/icons'
-import { formatDate, formatPrice } from '../../utils/helpfulFunctions';
+import { formatDate, formatPrice } from '@utils/helpfulFunctions';
 import { MdAttachMoney } from 'react-icons/md'
 
 import AppContext from '@components/AppContext';
@@ -33,7 +33,7 @@ export const ExploreNFTCard = ({ nft }) => {
       shadow='lg'
       alignItems='center'
     >
-      <Flex overflow='hidden' height='200px' borderTopRadius='lg' 
+      <Flex overflow='hidden' height='200px' borderTopRadius='lg'
             className='animate-on-hover'>
         <MotionChakraImage
           src={`https://ipfs.infura.io/ipfs/${image}`}
@@ -60,12 +60,12 @@ export const ExploreNFTCard = ({ nft }) => {
         <Text fontWeight='thin' textAlign='left' ml='2' mr='2' >
           <StarIcon/> Category: <Badge colorScheme='green'>{category}</Badge>
         </Text>
-        {owner.toUpperCase() !== NFTMarketplaceAddress.toUpperCase() ? 
+        {owner.toUpperCase() !== NFTMarketplaceAddress.toUpperCase() ?
           <Text fontWeight='thin' textAlign='left'>
             <Badge colorScheme='yellow'>Item hasn't put an offer yet</Badge>
             <br/><br/><br/>
           </Text>:
-          (offer.user.toUpperCase() === account.toUpperCase()) ? 
+          (offer.user.toUpperCase() === account.toUpperCase()) ?
             <Text fontWeight='thin' textAlign='left'>
               <Badge colorScheme='yellow'>This is your NFT</Badge>
               <br/><br/><br/>
@@ -80,12 +80,12 @@ export const ExploreNFTCard = ({ nft }) => {
                       >
                 Buy Item
               </Button>
-            </> 
+            </>
           }
         <Divider/>
         <Text fontWeight='thin' textAlign='left' ml='2' mr='2'>
           <CalendarIcon/> Created <Badge  colorScheme='blue'>{formatDate(dateCreated)}</Badge> ago
-        </Text>      
+        </Text>
         </VStack>
     </Flex>
   );
