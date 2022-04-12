@@ -6,13 +6,13 @@ import AppContext from '@components/AppContext';
 import { truncate } from '@utils/helpfulFunctions';
 import { SettingsIcon } from '@chakra-ui/icons'
 import { MdLogout, MdAnalytics, MdAccountCircle, MdAccountBalanceWallet } from 'react-icons/md'
-import { formatBigNumber } from '../../utils/helpfulFunctions'
+import { formatBigNumber } from '@utils/helpfulFunctions'
 
 export const ConnectWallet = () => {
   const { account, connectWallet, disconnectWallet, totalBalance } = useContext(AppContext);
   const [balance, setBalance] = useState();
   const router = useRouter();
-  
+
   useEffect(() => {
     const fetch = async () => {
       const ba = await totalBalance();
@@ -64,7 +64,7 @@ export const ConnectWallet = () => {
               <Icon as={MdLogout} /> &nbsp; Logout
             </MenuItem>
           </MenuList>
-        </Menu> 
+        </Menu>
       );
     } else {
       return (

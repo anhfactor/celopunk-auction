@@ -10,7 +10,7 @@ contract NFTMarketplace {
   mapping (address => uint) public userFunds;
   mapping(uint => Seller) public sellers;
   NFTCollection nftCollection;
-  
+
   struct _Offer {
     uint offerId;
     uint id;
@@ -21,7 +21,7 @@ contract NFTMarketplace {
   }
 
   struct Seller {
-       address userAddres;
+       address userAddress;
        uint balance;
    }
 
@@ -41,7 +41,7 @@ contract NFTMarketplace {
   constructor(address _nftCollection) {
     nftCollection = NFTCollection(_nftCollection);
   }
-  
+
   function makeOffer(uint _id, uint _price) public {
     nftCollection.transferFrom(msg.sender, address(this), _id);
     offerCount ++;
@@ -59,7 +59,7 @@ contract NFTMarketplace {
     nftCollection.transferFrom(address(this), msg.sender, _offer.id);
     _offer.fulfilled = true;
     userFunds[_offer.user] += msg.value;
-    sellers[count].userAddres = _offer.user;
+    sellers[count].userAddress = _offer.user;
     sellers[count].balance = msg.value;
     nftCollection.setTrack(msg.sender, _offer.id);
     count++;
@@ -81,7 +81,7 @@ contract NFTMarketplace {
     require(userFunds[msg.sender] > 0, 'This user has no funds to be claimed');
     payable(msg.sender).transfer(userFunds[msg.sender]);
     emit ClaimFunds(msg.sender, userFunds[msg.sender]);
-    userFunds[msg.sender] = 0;    
+    userFunds[msg.sender] = 0;
   }
 
   function getSellers() public view returns (address[] memory, uint[] memory){
@@ -89,7 +89,7 @@ contract NFTMarketplace {
        uint[] memory balances = new uint[](count);
 
        for(uint i = 0; i < count; i++){
-           userAddress[i] = sellers[i].userAddres;
+           userAddress[i] = sellers[i].userAddress;
            balances[i] = sellers[i].balance;
        }
        return (userAddress, balances);

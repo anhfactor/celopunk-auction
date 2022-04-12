@@ -5,10 +5,10 @@ import { MdAttachMoney } from 'react-icons/md'
 
 import AppContext from '@components/AppContext';
 import { MotionChakraImage } from '@components/Animated/MotionChakraImage';
-import { formatDate } from '../../utils/helpfulFunctions';
+import { formatDate } from '@utils/helpfulFunctions';
 import { useRouter } from 'next/router';
 import Web3 from 'web3';
-import { formatPrice } from '../../utils/helpfulFunctions'
+import { formatPrice } from '@utils/helpfulFunctions'
 export const CollectedNFTCard = ({ nft }) => {
   const router = useRouter();
   const { account, makeOffer, cancelOffer } = useContext(AppContext);
@@ -26,7 +26,7 @@ export const CollectedNFTCard = ({ nft }) => {
     setTimeout(() => {
       router.push('/assets');
     }, 1000);
-  }; 
+  };
 
   const cancelHandler = async() => {
     setIsLoadingCancel(true);
@@ -74,7 +74,7 @@ export const CollectedNFTCard = ({ nft }) => {
           <Text fontWeight='thin' textAlign='left'>
             <Icon as={MdAttachMoney} /> Price: <Badge colorScheme='red'>{formatPrice(offer.price).toFixed(2)} Celo</Badge>
           </Text>
-          <Button colorScheme='red' variant='solid' size='sm' 
+          <Button colorScheme='red' variant='solid' size='sm'
                   onClick={cancelHandler}
                   isLoading={isLoadingCancel}
                   >
@@ -86,14 +86,14 @@ export const CollectedNFTCard = ({ nft }) => {
           This is your item, you can put it on sale
         </Text>
         <Stack direction='row' spacing={2} align='center'>
-          <Button colorScheme='blue' variant='solid' size='sm' 
+          <Button colorScheme='blue' variant='solid' size='sm'
                 onClick={makeOfferHandler}
                 isLoading={isLoading}
                 >
             Offer
           </Button>
-          <Input type='tel' 
-                placeholder='Celo ...' 
+          <Input type='tel'
+                placeholder='Celo ...'
                 size='sm'
                 value={price}
                 onChange={(event:any) => setPrice(event.target.value)}

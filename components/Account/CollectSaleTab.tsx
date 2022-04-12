@@ -12,12 +12,12 @@ import {
   Button
 } from '@chakra-ui/react';
 import { MdAccountBalanceWallet } from 'react-icons/md'
-import { formatPrice } from '../../utils/helpfulFunctions'
+import { formatPrice } from '@utils/helpfulFunctions'
 import AppContext from '@components/AppContext';
 
 
 export const CollectSaleTab = () => {
-  const { account, userFund, claimFunds } = useContext(AppContext);
+  const { userFund, claimFunds } = useContext(AppContext);
   const [fund, setFund] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,7 +52,7 @@ export const CollectSaleTab = () => {
       </Stack>
     );
   };
-  
+
 
   return (
     <Flex m='16'>
@@ -84,7 +84,7 @@ export const CollectSaleTab = () => {
               iconBg={useColorModeValue('green.100', 'green.900')}
               text={"Your sale balance: " + fund + " Celo"}
             />
-            <Button colorScheme='blue' variant='solid' size='sm' maxWidth={100} 
+            <Button colorScheme='blue' variant='solid' size='sm' maxWidth={100}
                 isLoading={isLoading}
                 onClick={claimFundHandler}
                 >

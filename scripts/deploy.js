@@ -1,6 +1,6 @@
 const hre = require('hardhat');
 const fs = require("fs");
-const constractABI = __dirname + "/../abi";
+const contractABI = __dirname + "/../abi";
 
 async function main() {
   const NFTCollection = await hre.ethers.getContractFactory('NFTCollection');
@@ -11,7 +11,7 @@ async function main() {
   console.log('NFTCollection deployed to:', nftCollectionAddress);
 
   await fs.writeFileSync(
-    constractABI + "/NFTCollection-address.json",
+      contractABI + "/NFTCollection-address.json",
     JSON.stringify({ NFTCollection: nftCollectionAddress }, undefined, 2)
   );
 
@@ -24,7 +24,7 @@ async function main() {
   console.log('NFTMarketplace deployed to:', nftMarketplaceAddress);
 
   await fs.writeFileSync(
-    constractABI + "/NFTMarketplace-address.json",
+      contractABI + "/NFTMarketplace-address.json",
     JSON.stringify({ NFTMarketplace: nftMarketplaceAddress }, undefined, 2)
   );
 }
