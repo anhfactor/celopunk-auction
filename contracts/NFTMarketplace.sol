@@ -49,12 +49,17 @@ contract NFTMarketplace {
     emit Offer(offerCount, _id, msg.sender, _price, false, false);
   }
 
-  function fillOffer(uint _offerId) public payable {
+  modifier offers_invariants(uint _offerId) {
+    // modifier to assert that certain invariants concerning offers hold
+    require(offers[_offerId].offerId == _offerId, "ensures an offer exists");
+    require(offers[_offerId].fulfilled == false, "ensures that an offer has not yet been fulfiled");
+    require(offers[_offerId].cancelled == false, "ensures that an offer has not been cancelled");
+    _;  
+  }
+
+  function fillOffer(uint _offerId) offers_invariants(_offerId) public payable {
     _Offer storage _offer = offers[_offerId];
-    require(_offer.offerId == _offerId, 'The offer must exist');
     require(_offer.user != msg.sender, 'The owner of the offer cannot fill it');
-    require(!_offer.fulfilled, 'An offer cannot be fulfilled twice');
-    require(!_offer.cancelled, 'A cancelled offer cannot be fulfilled');
     require(msg.value == _offer.price, 'The Celo amount should match with the NFT Price');
     nftCollection.transferFrom(address(this), msg.sender, _offer.id);
     _offer.fulfilled = true;
@@ -66,12 +71,9 @@ contract NFTMarketplace {
     emit OfferFilled(_offerId, _offer.id, msg.sender);
   }
 
-  function cancelOffer(uint _offerId) public {
+  function cancelOffer(uint _offerId) offers_invariants(_offerId) public {
     _Offer storage _offer = offers[_offerId];
-    require(_offer.offerId == _offerId, 'The offer must exist');
     require(_offer.user == msg.sender, 'The offer can only be canceled by the owner');
-    require(_offer.fulfilled == false, 'A fulfilled offer cannot be cancelled');
-    require(_offer.cancelled == false, 'An offer cannot be cancelled twice');
     nftCollection.transferFrom(address(this), msg.sender, _offer.id);
     _offer.cancelled = true;
     emit OfferCancelled(_offerId, _offer.id, msg.sender);
