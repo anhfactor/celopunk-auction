@@ -42,11 +42,15 @@ contract NFTMarketplace {
     nftCollection = NFTCollection(_nftCollection);
   }
 
-  function makeOffer(uint _id, uint _price) public {
+  function makeOffer(uint _id, uint _price) public returns (address){
+    // ensures the caller has ownership of the nft
+    require(nftCollection.ownerOf(_id) == msg.sender, "you do not own the nft you are trying to offer");
     nftCollection.transferFrom(msg.sender, address(this), _id);
     offerCount ++;
     offers[offerCount] = _Offer(offerCount, _id, msg.sender, _price, false, false);
     emit Offer(offerCount, _id, msg.sender, _price, false, false);
+
+    return (msg.sender);
   }
 
   modifier offers_invariants(uint _offerId) {
