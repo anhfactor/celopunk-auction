@@ -1,7 +1,8 @@
-require('@nomiclabs/hardhat-waffle');
-require('dotenv').config();
-
-task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
+require("@nomiclabs/hardhat-waffle");
+require("dotenv").config({ path: ".env" });
+// This is a sample Hardhat task. To learn how to create your own go to
+// https://hardhat.org/guides/create-task.html
+task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
 
   for (const account of accounts) {
@@ -9,29 +10,22 @@ task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
   }
 });
 
-const privateKey = process.env.PRIVATEKEY;
-if (!privateKey) {
-  throw new Error('Please set your privateKey in a .env file');
-}
+// You need to export an object to set up your config
+// Go to https://hardhat.org/config/ to learn more
 
+/**
+ * @type import('hardhat/config').HardhatUserConfig
+ */
 module.exports = {
+  solidity: "0.8.4",
   networks: {
-    hardhat: {
-      chainId: 1337,
-    },
     alfajores: {
       url: "https://alfajores-forno.celo-testnet.org",
-      accounts: [privateKey],
-      chainId: 44787,
-    },
-  },
-  solidity: {
-    version: '0.8.4',
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 1000,
+      accounts: {
+        mnemonic: process.env.MNEMONIC, // line 25
+        path: "m/44'/60'/0'/0", // line 26
       },
+      chainId: 44787,
     },
   },
 };
