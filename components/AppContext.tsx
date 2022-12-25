@@ -59,7 +59,7 @@ export const AppProvider = (props) => {
       setAccount(address)
       toast({
         title: 'Success',
-        description: 'Wallet connected succesfully.',
+        description: 'Wallet connected successfully.',
         status: 'success',
       });
     } catch (error) {
