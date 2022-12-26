@@ -56,7 +56,7 @@ contract NFTMarketplace {
   modifier offers_invariants(uint _offerId) {
     // modifier to assert that certain invariants concerning offers hold
     require(offers[_offerId].offerId == _offerId, "ensures an offer exists");
-    require(offers[_offerId].fulfilled == false, "ensures that an offer has not yet been fulfiled");
+    require(offers[_offerId].fulfilled == false, "ensures that an offer has not yet been fulfilled");
     require(offers[_offerId].cancelled == false, "ensures that an offer has not been cancelled");
     _;  
   }
