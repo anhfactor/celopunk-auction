@@ -15,9 +15,9 @@ contract NFTMarketplace {
     uint offerId;
     uint id;
     address user;
-    uint price;
     bool fulfilled;
     bool cancelled;
+    uint price;
   }
 
   struct Seller {
@@ -29,9 +29,9 @@ contract NFTMarketplace {
     uint offerId,
     uint id,
     address user,
-    uint price,
     bool fulfilled,
-    bool cancelled
+    bool cancelled,
+    uint price
   );
 
   event OfferFilled(uint offerId, uint id, address newOwner);
@@ -47,8 +47,8 @@ contract NFTMarketplace {
     require(nftCollection.ownerOf(_id) == msg.sender, "you do not own the nft you are trying to offer");
     nftCollection.transferFrom(msg.sender, address(this), _id);
     offerCount ++;
-    offers[offerCount] = _Offer(offerCount, _id, msg.sender, _price, false, false);
-    emit Offer(offerCount, _id, msg.sender, _price, false, false);
+    offers[offerCount] = _Offer(offerCount, _id, msg.sender, false, false, _price);
+    emit Offer(offerCount, _id, msg.sender, false, false, _price);
 
     return (msg.sender);
   }
@@ -94,9 +94,13 @@ contract NFTMarketplace {
        address[] memory userAddress = new address[](count);
        uint[] memory balances = new uint[](count);
 
-       for(uint i = 0; i < count; i++){
+       for(uint i; i < count;){
            userAddress[i] = sellers[i].userAddress;
            balances[i] = sellers[i].balance;
+
+           unchecked {
+               ++i;
+           }
        }
        return (userAddress, balances);
    }
